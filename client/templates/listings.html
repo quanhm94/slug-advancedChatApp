@@ -1,0 +1,19 @@
+<template name="listings">
+	<div class="listings">
+		<div class="listings-channels">
+			<h2>Channels</h2>
+			<ul class="channel-list">
+				{{#each channels}}
+					{{>channel name=name}}
+				{{/each}}
+			</ul>
+			<div>
+				{{#if getUserName}}
+					{{> createChannel}}
+				{{/if}}
+			</div>
+
+		</div>
+		<!-- <div class="listings_direct-messages"></div> -->
+	</div>
+</template>

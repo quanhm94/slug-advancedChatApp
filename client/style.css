@@ -1,0 +1,10 @@
+.channel:hover {
+    cursor: pointer;
+}
+.channel-name {
+  text-decoration: none;
+  
+}
+.glyphicon{
+  cursor: pointer;
+}

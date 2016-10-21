@@ -1,0 +1,10 @@
+<template name="app">
+    {{> header}}
+    {{> loginButtons}}
+    <div class="main">
+        {{> listings}}
+        {{> yield "channel-form" }}
+        {{> yield  }}
+    </div>
+    {{> footer}}
+</template>
