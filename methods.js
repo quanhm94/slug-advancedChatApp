@@ -16,3 +16,9 @@ Meteor.methods({
     Channels.update({_id: channel._id}, {$push: {subUsers: userId}});
   }
 });
+Meteor.methods({
+  uploadImage: function (img) {
+    Images.insert(img);
+  }
+});
+

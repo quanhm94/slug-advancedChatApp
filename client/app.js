@@ -116,3 +116,53 @@ Accounts.config({
 // Meteor.subscribe('messages');
 Meteor.subscribe('allUsernames');
 Meteor.subscribe('channels');
+Meteor.subscribe('images');
+
+//Image upload
+
+var uploader = new ReactiveVar();
+var currentUserId = Meteor.userId();
+Template.uploadImage.helpers({
+    images: Images.find({})
+});
+
+Template.uploadImage.events({
+    'change .uploadFile': function (event) {
+
+        event.preventDefault();
+
+        var upload = new Slingshot.Upload("imageUploader");
+        var timeStamp = Math.floor(Date.now());
+        upload.send(document.getElementById('uploadFile').files[0], function (error, downloadUrl) {
+            uploader.set();
+            if (error) {
+                console.error('Error uploading');
+            }
+            else {
+                console.log("Success!");
+                Meteor.call('uploadImage', {imageURL: downloadUrl, time: timeStamp, uploadedBy: currentUserId});
+            }
+        });
+        uploader.set(upload);
+    }
+});
+
+Template.uploadImage.helpers({
+
+    isUploading: function () {
+        return Boolean(uploader.get());
+    },
+
+    progress: function () {
+        var upload = uploader.get();
+        if (upload)
+            return Math.round(upload.progress() * 100);
+    },
+
+    url: function () {
+
+        return Images.findOne({uploadedBy: currentUserId}, {sort: {time: -1}});
+
+    },
+
+});
