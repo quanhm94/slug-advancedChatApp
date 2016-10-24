@@ -1,10 +1,12 @@
 <template name="app">
-    {{> header}}
-    {{> loginButtons}}
-    <div class="main">
-        {{> listings}}
+    <div class="container-fluid">
+        <div class="header row">
+            {{> header}}
+            {{> listings}}
+        </div>
+            {{> footer}}
+
         {{> yield "channel-form" }}
         {{> yield  }}
     </div>
-    {{> footer}}
 </template>
