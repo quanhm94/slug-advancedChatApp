@@ -89,6 +89,13 @@
     cursor: pointer;
 }
 
+/*Friends panel styling */
+
+.friend-list {
+    margin-top: 20px;
+}
+
+
 /*Footer area styling */
 .footer {
     height: 7vh;

@@ -1,4 +1,12 @@
 <template name="friendListing">
     <!--Codes go here-->
 
+    <ul class="friend-list list-group">
+        {{#each getFriends}}
+            {{>friend name=name}}
+        {{/each}}
+    </ul>
+
+
+
 </template>

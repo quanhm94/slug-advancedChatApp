@@ -51,6 +51,8 @@ Template.header.helpers({
     return Session.get('channel');
   }
 });
+
+//Footer helpers
 Template.footer.events({
   'keypress input': function(event) {
     var inputCheck = $('.input-box_text').val();
@@ -67,7 +69,14 @@ Template.footer.events({
     }
 });
 
-//Register new helper to get username from id
+//Helper to get friends if user is logged in
+Template.registerHelper("getFriends", function(){
+    if(Meteor.user()){
+        return Meteor.user().profile.friends;
+    }
+});
+
+//Helper to get username from id
 Template.registerHelper("usernameFromId", function(userId){
   var user = Meteor.users.findOne({_id: userId});
   if(typeof user === "undefined") {
@@ -112,6 +121,8 @@ Accounts.ui.config({
 Accounts.config({
   sendVerificationEmail: true
 });
+
+
 //Subscribe to the database
 // Meteor.subscribe('messages');
 Meteor.subscribe('allUsernames');

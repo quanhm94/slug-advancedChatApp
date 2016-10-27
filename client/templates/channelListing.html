@@ -4,12 +4,13 @@
             {{#each channels}}
                 {{>channel name=name}}
             {{/each}}
+            <li>
+                {{#if getUserName}}
+                    {{> createChannel}}
+                {{/if}}
+            </li>
         </ul>
-        <div>
-            {{#if getUserName}}
-                {{> createChannel}}
-            {{/if}}
-        </div>
+
 
 		<!-- <div class="listings_direct-messages"></div> -->
 </template>
