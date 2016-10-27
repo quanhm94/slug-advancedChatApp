@@ -1,6 +1,6 @@
-<template name="listings">
-    <div class="listings-channels col-md-9">
-        <ul class="channel-list list-group">
+<template name="channelListing">
+
+        <ul class="channel-list nav nav-tabs">
             {{#each channels}}
                 {{>channel name=name}}
             {{/each}}
@@ -10,6 +10,6 @@
                 {{> createChannel}}
             {{/if}}
         </div>
-    </div>
+
 		<!-- <div class="listings_direct-messages"></div> -->
 </template>

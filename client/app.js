@@ -20,7 +20,7 @@ Template.messages.onCreated(function(){
   });
 });
 //Channels
-Template.listings.helpers({
+Template.channelListing.helpers({
   channels: Channels.find({})
 });
 

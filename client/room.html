@@ -1,12 +1,27 @@
 <template name="app">
-    <div class="container-fluid">
+    <div class="container-fluid" style="max-width:70vw;background-color:#F2F1EF;margin:auto; padding:auto;">
         <div class="header row">
-            {{> header}}
-            {{> listings}}
+            <div class="app-menu col-md-3 left-panel">
+                {{> header}}
+            </div>
+            <div class="listings-channels col-md-9 right-panel">
+                {{> channelListing}}
+            </div>
         </div>
+        <div class="row">
+            <div class="user-interactive-panel col-md-3 left-panel">
+            </div>
+            <div class="message-board col-md-9 right-panel">
+                {{> yield  }}
+            </div>
+
+        </div>
+        <div class="row footer">
             {{> footer}}
+        </div>
+
 
         {{> yield "channel-form" }}
-        {{> yield  }}
+
     </div>
 </template>

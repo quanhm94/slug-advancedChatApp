@@ -1,8 +1,8 @@
 <template name="channel">
-	<li class="channel list-group-item {{active}}">
-            <a class="channel-name" href="/{{name}}" >#{{name}}</a>
-			<span class="badge">
+	<li id="channel" class="channel {{active}}" role="presentation">
+            <a id="channel-name" class="channel-name" href="/{{name}}" >#{{name}} <span class="badge">
 				0
-			</span>
+			</span></a>
+
 	</li>
 </template>

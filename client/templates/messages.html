@@ -1,5 +1,5 @@
 <template name="messages">
-    <div class="message-history">
+    <ul class="list-group message-history">
       {{#if Template.subscriptionsReady}}
         {{#each messages}}
             {{>message text=text userId = userId timestamp = timestamp}}
@@ -7,5 +7,5 @@
       {{else}}
         Loading ...
       {{/if}}
-    </div>
+    </ul>
 </template>
