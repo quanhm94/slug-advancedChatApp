@@ -75,7 +75,22 @@ Template.registerHelper("getFriends", function(){
         return Meteor.user().profile.friends;
     }
 });
+//Add friend to session friend list
+Template.friend.events({
+    'click .friend-name' : function (e,t) {
+        var name = t.$(e.currentTarget).children('.name-text').text();
+        var friends = Session.get('activeFriend');
+        if (friends.indexOf(name) === -1 && friends.length() != 0 ) {
+            Session.set('activeFriend', friends.push(name));
 
+        }
+        else if (friends.length() === 0) {
+            Session.set('activeFriend', friends.push(name));
+        }
+        console.log(Session.get('activeFriend'));
+
+    }
+});
 //Helper to get username from id
 Template.registerHelper("usernameFromId", function(userId){
   var user = Meteor.users.findOne({_id: userId});
