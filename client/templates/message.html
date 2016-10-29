@@ -1,7 +1,16 @@
 <template name="message">
     <a href="#" class="list-group-item list-group-item-info message">
         <a href="" class="message-profile-pic"></a>
-        <a href="" class="message-username">{{usernameFromId userId}}</a>
+        <div class="dropdown">
+            <a href="" id="menu1" class="message-username dropdown-toggle" data-toggle="dropdown" >{{usernameFromId userId}}</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a class ="add-friend" role="menuitem" tabindex="-1" href="#">Add as friend</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send a message</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
+            </ul>
+        </div>
+
         <span class="message-timestamp">{{getTime timestamp}}</span>
         <span class="message-star"></span>
         <span class="message-content">{{text}}</span>

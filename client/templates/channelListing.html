@@ -4,6 +4,11 @@
             {{#each channels}}
                 {{>channel name=name}}
             {{/each}}
+
+            {{#each friends}}
+                {{>channel name=this}}
+            {{/each}}
+
             <li>
                 {{#if getUserName}}
                     {{> createChannel}}

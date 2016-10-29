@@ -1,5 +1,7 @@
 Meteor.startup(function() {
-  Session.setDefault('channel', 'channel3');
+    var friends = [];
+    Session.setDefault('channel', 'channel3');
+    Session.setDefault('activeFriend', friends);
 });
 
 
@@ -21,16 +23,14 @@ Template.messages.onCreated(function(){
 });
 //Channels
 Template.channelListing.helpers({
-  channels: Channels.find({})
+    channels: Channels.find({}),
+    friends: Session.get('activeFriend')
 });
 
 
 Template.channelForm.events({
   'click .channel-submit': function(e){
-    Meteor.call('newChannel', {name: $('.channel-input').val()});
-    Session.setPersistent('channel', $('.channel-input').val());
-    var channel = Channels.findOne({name: $('.channel-input').val()});
-    Meteor.call('updateChannel', {channel: channel, userId: Meteor.userId()});
+      createChannel($('.channel-input').val());
   }
 });
 
@@ -78,16 +78,14 @@ Template.registerHelper("getFriends", function(){
 //Add friend to session friend list
 Template.friend.events({
     'click .friend-name' : function (e,t) {
+
         var name = t.$(e.currentTarget).children('.name-text').text();
         var friends = Session.get('activeFriend');
-        if (friends.indexOf(name) === -1 && friends.length() != 0 ) {
-            Session.set('activeFriend', friends.push(name));
-
-        }
-        else if (friends.length() === 0) {
-            Session.set('activeFriend', friends.push(name));
-        }
-        console.log(Session.get('activeFriend'));
+        if (friends.indexOf(name) === -1 ) {
+                friends.push(name);
+                Session.set('activeFriend', friends);
+                createChannel(name);
+            }
 
     }
 });
@@ -192,3 +190,9 @@ Template.uploadImage.helpers({
     },
 
 });
+
+function createChannel(channelName) {
+    Meteor.call('newChannel', {name: channelName});
+    var channel = Channels.findOne({name: channelName});
+    Meteor.call('updateChannel', {channel: channel, userId: Meteor.userId()});
+}

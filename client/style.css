@@ -1,5 +1,9 @@
 /*General Styling */
 
+/* Message Styling */
+.message > *{
+    display: inline-block;
+}
 
 
 /* Header styling */
@@ -145,4 +149,8 @@
 .input-wrap {
     width: 90%;
     margin: auto;
+}
+
+.name-text {
+    border: 1px red solid;
 }
