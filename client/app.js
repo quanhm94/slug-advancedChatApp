@@ -1,5 +1,6 @@
 Meteor.startup(function() {
     var friends = [];
+
     Session.setDefault('channel', 'channel3');
     Session.setDefault('activeFriend', friends);
 });
@@ -93,8 +94,14 @@ Template.friend.events({
 //Helper to add friend when user lick add as friend menu
 Template.message.events({
     'click .add-friend' : function(e,t) {
-        Meteor.user.friends = (t.$(e.currentTarget).attr('id'));
-        Meteor.call('addFriends', {friend: t.$(e.currentTarget).attr('id'), user: Meteor.user()});
+        var friendName =   t.$(e.currentTarget).attr('id');
+        var friend = Meteor.users.findOne({username: friendName});
+        var userFriends = Meteor.user().profile.friends;
+        var friendId = friend._id;
+        if (friendId != Meteor.user()._id && userFriends.indexOf(friendId) === -1) {
+            Meteor.call('addFriends', friendId);
+        }
+
     }
 });
 //Helper to get username from id
@@ -202,5 +209,6 @@ Template.uploadImage.helpers({
 function createChannel(channelName) {
     Meteor.call('newChannel', {name: channelName});
     var channel = Channels.findOne({name: channelName});
-    Meteor.call('updateChannel', {channel: channel, userId: Meteor.userId()});
+    console.log(channel);
+    Session.setPersistent('channel', channelName);
 }

@@ -12,14 +12,19 @@ Meteor.methods({
   }
 });
 Meteor.methods({
-  updateChannel: function (channel, userId) {
-    Channels.update({_id: channel._id}, {$push: {subUsers: userId}});
+  updateChannel: function (channel) {
+    console.log(channel);
+    Channels.update({_id: channel._id}, {$push: {subUsers: Meteor.userId()}});
   }
 });
 
 Meteor.methods({
-  addFriends: function (friend, user) {
-    Meteor.users.update(user, {$set: {"profile.friends": user.profile.friends.push({name: friend})}});
+  addFriends: function (friendId) {
+
+    var friends = Meteor.user().profile.friends;
+    friends.push(friendId);
+    Meteor.users.update(Meteor.user()._id, {$set: {"profile.friends": friends}});
+    console.log(Meteor.user());
   }
 });
 Meteor.methods({

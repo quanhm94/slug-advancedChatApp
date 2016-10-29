@@ -3,6 +3,6 @@
  */
 Accounts.onCreateUser(function (options, user) {
     if (user.profile == undefined) user.profile = {};
-    user.profile.friends = [{name: "Tom"}, {name: "Dan"}];
+    user.profile.friends = [];
     return user;
 });
