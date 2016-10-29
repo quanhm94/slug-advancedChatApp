@@ -89,6 +89,14 @@ Template.friend.events({
 
     }
 });
+
+//Helper to add friend when user lick add as friend menu
+Template.message.events({
+    'click .add-friend' : function(e,t) {
+        Meteor.user.friends = (t.$(e.currentTarget).attr('id'));
+        Meteor.call('addFriends', {friend: t.$(e.currentTarget).attr('id'), user: Meteor.user()});
+    }
+});
 //Helper to get username from id
 Template.registerHelper("usernameFromId", function(userId){
   var user = Meteor.users.findOne({_id: userId});
